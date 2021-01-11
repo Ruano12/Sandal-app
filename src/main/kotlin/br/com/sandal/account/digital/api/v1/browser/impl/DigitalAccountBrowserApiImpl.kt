@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
+import java.util.stream.Collectors
 
 @RestController
 @Transactional
@@ -31,5 +32,14 @@ class DigitalAccountBrowserApiImpl(val digitalAccountBrowser: DigitalAccountBrow
         else null
 
         return ResponseEntity<DigitalAccountResponseDto>(dto, HttpStatus.OK)
+    }
+
+    override fun findByPersonId(personId: UUID): HttpEntity<List<DigitalAccountResponseDto>> {
+        var digitalAccounts:List<DigitalAccount>? = digitalAccountBrowser.findByPersonId(personId)
+
+        var accounts:List<DigitalAccountResponseDto> = digitalAccounts!!.stream().map { acc ->
+            DigitalAccountResponseDto.Companion.fromEntity(acc) }.collect(Collectors.toList())
+
+        return ResponseEntity<List<DigitalAccountResponseDto>>(accounts, HttpStatus.OK)
     }
 }

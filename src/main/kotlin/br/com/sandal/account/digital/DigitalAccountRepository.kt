@@ -9,4 +9,7 @@ interface DigitalAccountRepository : JpaRepository<DigitalAccount, UUID> {
 
     @Query("select a from DigitalAccount a where a.accountNumber = :accountNumber")
     fun findByAccountNumber(@Param("accountNumber") accountNumber:String):Optional<DigitalAccount>?
+
+    @Query("select a from DigitalAccount a where a.personId = :personId")
+    fun findByPersonId(@Param("personId") personId:UUID):List<DigitalAccount>?
 }

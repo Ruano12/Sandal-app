@@ -22,4 +22,7 @@ class DigitalAccountBrowserImpl(val digitalAccountRepository: DigitalAccountRepo
 
     override fun findByAccountNumber(accountNumber: String): Optional<DigitalAccount>? =
         digitalAccountRepository.findByAccountNumber(accountNumber)
+
+    override fun findByPersonId(personId: UUID): List<DigitalAccount>? =
+        digitalAccountRepository.findByPersonId(personId)
 }

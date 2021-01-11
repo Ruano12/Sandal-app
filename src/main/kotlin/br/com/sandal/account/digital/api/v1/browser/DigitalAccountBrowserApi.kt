@@ -17,4 +17,7 @@ interface DigitalAccountBrowserApi {
 
     @RequestMapping(value = ["/find-by-account-number"], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findByAccountNumber(@RequestParam("account-number") accountNumber:String):HttpEntity<DigitalAccountResponseDto>
+
+    @RequestMapping(value = ["/find-by-person-id"], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun findByPersonId(@RequestParam("person-id") personId:UUID):HttpEntity<List<DigitalAccountResponseDto>>
 }
